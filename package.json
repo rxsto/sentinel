@@ -1,0 +1,29 @@
+{
+  "name": "sentinel",
+  "version": "0.1.0",
+  "description": "A ground service for lambda",
+  "author": "Rxsto <oz@farfrom.social> (https://rxsto.me)",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rxsto/sentinel.git"
+  },
+  "keywords": [
+    "lambda",
+    "discord"
+  ],
+  "bugs": {
+    "url": "https://github.com/Rxsto/sentinel/issues"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0",
+    "logger": "github:rxsto/logger",
+    "superagent": "^5.1.0",
+    "ws": "^7.0.0"
+  }
+}

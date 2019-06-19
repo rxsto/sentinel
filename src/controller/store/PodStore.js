@@ -7,7 +7,7 @@ class PodStore extends Store {
     this.client = client;
   }
 
-  isLaunchable() {
+  areLaunchable() {
     let state = true;
     this.forEach(pod => {
       if (pod.state !== 'LAUNCHABLE') {
@@ -17,13 +17,18 @@ class PodStore extends Store {
     return state;
   }
 
-  getNextLaunchable() {
+  getNextLaunchable(id) {
     let next = null;
-    this.forEach(pod => {
-      if (pod.state === 'LAUNCHABLE') {
-        next = pod;
-      }
-    });
+    const pre = this.get(id);
+    if (pre.state !== 'LAUNCHABLE') {
+      this.forEach(pod => {
+        if (pod.state === 'LAUNCHABLE') {
+          next = pod;
+        }
+      });
+    } else {
+      next = pre;
+    }
     return next;
   }
 }

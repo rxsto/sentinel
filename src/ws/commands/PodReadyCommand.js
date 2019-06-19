@@ -11,15 +11,11 @@ class PodReadyCommand extends Command {
   run(id) {
     this.ws.client.log.info(`[Websocket] [POD ${id}] Ready`);
     this.ws.client.controller.pods.get(id).setState('READY');
-    const next = this.ws.client.controller.pods.getNextLaunchable();
+    const next = this.ws.client.controller.pods.getNextLaunchable(id);
     if (next !== null) {
-      this.ws.server.clients.forEach(client => {
-        if (!client.launched) {
-          client.send(this.ws.message.encode(new Message('managerlaunch').get()));
-          this.ws.client.log.info(`[Websocket] [POD ${next.id}] Launched`);
-          client.launched = true;
-        }
-      });
+      const client = this.ws.clients.get(next.id);
+      client.send(this.ws.message.encode(new Message('managerlaunch').get()));
+      this.ws.client.log.info(`[Websocket] [POD ${next.id}] Launched`);
     }
   }
 }
